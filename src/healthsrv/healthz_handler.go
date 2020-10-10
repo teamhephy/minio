@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/deis/minio/src/storage"
 	minio "github.com/minio/minio-go"
+	"github.com/teamhephy/minio/src/storage"
 )
 
 type healthZResp struct {

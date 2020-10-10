@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/deis/minio/src/storage"
 	minio "github.com/minio/minio-go"
+	"github.com/teamhephy/minio/src/storage"
 )
 
 func TestHealthzHandler(t *testing.T) {

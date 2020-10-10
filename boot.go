@@ -12,9 +12,9 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/deis/minio/src/healthsrv"
-	"github.com/deis/pkg/utils"
 	minio "github.com/minio/minio-go"
+	"github.com/teamhephy/minio/src/healthsrv"
+	"github.com/teamhephy/pkg/utils"
 )
 
 const (

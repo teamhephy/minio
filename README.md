@@ -2,7 +2,7 @@
 # Deis Minio v2
 
 [![Build Status](https://travis-ci.org/teamhephy/minio.svg?branch=master)](https://travis-ci.org/teamhephy/minio)
-[![Go Report Card](http://goreportcard.com/badge/deis/minio)](http://goreportcard.com/report/deis/minio)
+[![Go Report Card](http://goreportcard.com/badge/teamhephy/minio)](http://goreportcard.com/report/teamhephy/minio)
 [![Docker Repository on Quay](https://quay.io/repository/deisci/minio/status "Docker Repository on Quay")](https://quay.io/repository/deisci/minio)
 
 Deis (pronounced DAY-iss) Workflow is an open source Platform as a Service (PaaS) that adds a developer-friendly layer to any [Kubernetes](http://kubernetes.io) cluster, making it easy to deploy and manage applications on your own servers.

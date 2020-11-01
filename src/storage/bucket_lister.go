@@ -1,12 +1,14 @@
 package storage
 
 import (
-	minio "github.com/minio/minio-go"
+	"context"
+
+	minio "github.com/minio/minio-go/v7"
 )
 
 // BucketLister is an interface that knows how to list buckets on object storage
 type BucketLister interface {
-	ListBuckets() ([]minio.BucketInfo, error)
+	ListBuckets(ctx context.Context) ([]minio.BucketInfo, error)
 }
 
 type fakeBucketLister struct {
@@ -17,6 +19,6 @@ func NewFakeBucketLister(buckets []minio.BucketInfo) BucketLister {
 	return &fakeBucketLister{bucketInfos: buckets}
 }
 
-func (b *fakeBucketLister) ListBuckets() ([]minio.BucketInfo, error) {
+func (b *fakeBucketLister) ListBuckets(ctx context.Context) ([]minio.BucketInfo, error) {
 	return b.bucketInfos, nil
 }

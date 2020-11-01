@@ -12,7 +12,8 @@ import (
 	"strings"
 	"text/template"
 
-	minio "github.com/minio/minio-go"
+	minio "github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/teamhephy/minio/src/healthsrv"
 	"github.com/teamhephy/pkg/utils"
 )
@@ -86,12 +87,10 @@ func readSecrets() (string, string) {
 }
 
 func newMinioClient(host, port, accessKey, accessSecret string, insecure bool) (*minio.Client, error) {
-	return minio.New(
-		fmt.Sprintf("%s:%s", host, port),
-		accessKey,
-		accessSecret,
-		insecure,
-	)
+	return minio.New(fmt.Sprintf("%s:%s", host, port), &minio.Options{
+		Creds:  credentials.NewStaticV4(accessKey, accessSecret, ""),
+		Secure: insecure,
+	})
 }
 
 func main() {

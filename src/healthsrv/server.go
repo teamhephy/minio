@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	minio "github.com/minio/minio-go"
+	minio "github.com/minio/minio-go/v7"
 )
 
 const (

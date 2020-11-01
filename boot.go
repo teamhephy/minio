@@ -12,7 +12,8 @@ import (
 	"strings"
 	"text/template"
 
-	minio "github.com/minio/minio-go"
+	minio "github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/teamhephy/minio/src/healthsrv"
 	"github.com/teamhephy/pkg/utils"
 )
@@ -69,10 +70,9 @@ func run(cmd string) error {
 	}
 	cmdString := cmdBuf.String()
 	fmt.Println(cmdString)
-	var cmdl *exec.Cmd
-	cmdl = exec.Command("sh", "-c", cmdString)
+	var cmdl = exec.Command("sh", "-c", cmdString)
 	if _, _, err := utils.RunCommandWithStdoutStderr(cmdl); err != nil {
-		return err
+		return fmt.Errorf("error running the minio startup command: %s", err)
 	}
 	return nil
 }
@@ -85,13 +85,11 @@ func readSecrets() (string, string) {
 	return strings.TrimSpace(string(keyID)), strings.TrimSpace(string(accessKey))
 }
 
-func newMinioClient(host, port, accessKey, accessSecret string, insecure bool) (minio.CloudStorageClient, error) {
-	return minio.New(
-		fmt.Sprintf("%s:%s", host, port),
-		accessKey,
-		accessSecret,
-		insecure,
-	)
+func newMinioClient(host, port, accessKey, accessSecret string, insecure bool) (*minio.Client, error) {
+	return minio.New(fmt.Sprintf("%s:%s", host, port), &minio.Options{
+		Creds:  credentials.NewStaticV4(accessKey, accessSecret, ""),
+		Secure: insecure,
+	})
 }
 
 func main() {

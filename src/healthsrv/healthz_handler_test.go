@@ -8,14 +8,14 @@ import (
 	"testing"
 	"time"
 
-	minio "github.com/minio/minio-go"
+	minio "github.com/minio/minio-go/v7"
 	"github.com/teamhephy/minio/src/storage"
 )
 
 func TestHealthzHandler(t *testing.T) {
 	buckets := []minio.BucketInfo{
-		minio.BucketInfo{Name: "bucket1", CreationDate: time.Now()},
-		minio.BucketInfo{Name: "bucket2", CreationDate: time.Now()},
+		{Name: "bucket1", CreationDate: time.Now()},
+		{Name: "bucket2", CreationDate: time.Now()},
 	}
 	bucketLister := storage.NewFakeBucketLister(buckets)
 	handler := healthZHandler(bucketLister)

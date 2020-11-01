@@ -9,19 +9,17 @@ DEV_ENV_CMD := ${DEV_ENV_PREFIX} ${DEV_ENV_IMAGE}
 
 LDFLAGS := "-s -X main.version=${VERSION}"
 BINDIR := ./rootfs/bin
-#DEV_REGISTRY ?= $(docker-machine ip deis):5000
-#DEIS_REGISTRY ?= ${DEV_REGISTRY}
+DEV_REGISTRY ?= hephy/
+HEPHY_REGISTRY ?= ${DEV_REGISTRY}
 
 IMAGE_PREFIX ?= hephy
 
 include versioning.mk
 
-TEST_PACKAGES := $(shell ${DEV_ENV_CMD} glide nv)
-
 all: build docker-build docker-push
 
 bootstrap:
-	${DEV_ENV_CMD} glide install
+	${DEV_ENV_CMD} go mod vendor
 
 glideup:
 	${DEV_ENV_CMD} glide up
@@ -30,8 +28,11 @@ build:
 	mkdir -p ${BINDIR}
 	${DEV_ENV_CMD} go build -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
 
-test:
-	${DEV_ENV_CMD} go test ${TEST_PACKAGES}
+test: test-style
+	${DEV_ENV_CMD} go test ./...
+
+test-style:
+	${DEV_ENV_CMD} lint --deadline
 
 test-cover:
 	${DEV_ENV_CMD} test-cover.sh
@@ -43,4 +44,4 @@ docker-build: build
 
 deploy: build docker-build docker-push
 
-.PHONY: all bootstrap glideup build test docker-build deploy
+.PHONY: all bootstrap build test docker-build deploy

@@ -15,6 +15,7 @@ type fakeBucketLister struct {
 	bucketInfos []minio.BucketInfo
 }
 
+// NewFakeBucketLister is a function to create a BucketLister for testing
 func NewFakeBucketLister(buckets []minio.BucketInfo) BucketLister {
 	return &fakeBucketLister{bucketInfos: buckets}
 }

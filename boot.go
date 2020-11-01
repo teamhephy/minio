@@ -72,7 +72,7 @@ func run(cmd string) error {
 	fmt.Println(cmdString)
 	var cmdl = exec.Command("sh", "-c", cmdString)
 	if _, _, err := utils.RunCommandWithStdoutStderr(cmdl); err != nil {
-		return err
+		return fmt.Errorf("error running the minio startup command: %s", err)
 	}
 	return nil
 }

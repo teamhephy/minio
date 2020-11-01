@@ -7,6 +7,7 @@ import (
 	minio "github.com/minio/minio-go/v7"
 )
 
+// DefaultHost and DefaultPort for minio server
 const (
 	DefaultHost = "0.0.0.0"
 	DefaultPort = 8082

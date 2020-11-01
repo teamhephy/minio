@@ -70,8 +70,7 @@ func run(cmd string) error {
 	}
 	cmdString := cmdBuf.String()
 	fmt.Println(cmdString)
-	var cmdl *exec.Cmd
-	cmdl = exec.Command("sh", "-c", cmdString)
+	var cmdl = exec.Command("sh", "-c", cmdString)
 	if _, _, err := utils.RunCommandWithStdoutStderr(cmdl); err != nil {
 		return err
 	}

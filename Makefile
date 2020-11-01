@@ -28,8 +28,11 @@ build:
 	mkdir -p ${BINDIR}
 	${DEV_ENV_CMD} go build -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
 
-test:
+test: test-style
 	${DEV_ENV_CMD} go test ./...
+
+test-style:
+	${DEV_ENV_CMD} lint --deadline
 
 test-cover:
 	${DEV_ENV_CMD} test-cover.sh

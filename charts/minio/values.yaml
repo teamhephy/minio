@@ -1,5 +1,5 @@
 org: "hephy"
-pull_policy: "Always"
-docker_tag: canary
+pull_policy: "IfNotPresent"
+docker_tag: v2.4.5
 global:
   storage: minio

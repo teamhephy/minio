@@ -1,6 +1,8 @@
+apiVersion: v2
 name: minio
 home: https://github.com/teamhephy/minio
-version:  <Will be populated by the ci before publishing the chart>
+version: 2.4.7
 description: Minio Object Storage in Kubernetes, used by Hephy Workflow.
 maintainers:
-  - email: team@teamhephy.com
+- name: Team Hephy
+  email: team@teamhephy.com
